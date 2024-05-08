@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mahjong-training</title>
+</head>
+<body>
+    <button onclick="showTiles(7)">7枚</button>
+    <button onclick="showTiles(10)">10枚</button>
+    <div id="app"></div>
+</body>
+<script>
+    /**
+     * 2~7の4枚ずつをsize枚取得してdiv#appに表示する
+     */
+    function showTiles(size) {
+        const appEl = document.getElementById("app");
+        const allTiles = "222233334444555566667777".split("")
+
+            const tiles = [];
+            const choices = allTiles.slice(); // オリジナルの配列を変更しないようにコピーを作成
+            
+            for (let i = 0; i < size; i++) {
+                const randomIndex = Math.floor(Math.random() * choices.length);
+                tiles.push(choices[randomIndex]);
+                choices.splice(randomIndex, 1); // 選択された要素を配列から削除
+            }
+        appEl.insertAdjacentHTML("afterbegin",`${new Date().toLocaleString()} ${tiles.join("")}<br>`);
+    }
+    showTiles(7) // 最初に一つ表示しておく
+</script>
+</html>
